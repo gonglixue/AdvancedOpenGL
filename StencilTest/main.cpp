@@ -185,8 +185,10 @@ int main()
 		glBindVertexArray(0);
 
 		// 1st pass, draw objects as normal, filling the stencil buffer
-		glStencilFunc(GL_ALWAYS, 1, 0xFF);
-		glStencilMask(0xFF);
+		glStencilMask(0xFF);  // 可写入stencil buffer
+		glStencilFunc(GL_ALWAYS, 1, 0xFF); // 所有fragment总是通过模板测试。第三个参数用于和ref做And操作. 
+		//这会把这个片元的stencil buffer写为1。在第58行设置了REPLACE，也就是通过模板测试后，该片元的stencil buffer被ref替代。
+
 		glBindVertexArray(cubeVAO);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
 		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
@@ -201,14 +203,14 @@ int main()
 		// 2nd, draw slightly scaled versions of the objects, 
 		// because stencil buffer is now filled with several 1s. The parts of the buffer that are 1 are 
 		// noew not drawn, thus only drawing the objects' size differences, making it look like borders.
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);  // 第一个pass里最终绘制出的片元的stencil buffer都是1.
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
 		shaderSingleColor.Use();
 		GLfloat scale = 1.1;
 		
 		glBindVertexArray(cubeVAO);
-		glBindTexture(GL_TEXTURE_2D, cubeTexture);
+		//glBindTexture(GL_TEXTURE_2D, cubeTexture);
 		model = glm::mat4();
 		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
 		model = glm::scale(model, glm::vec3(scale, scale, scale));
