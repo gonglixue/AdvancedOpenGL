@@ -1,4 +1,0 @@
-.vs/
-*.exe
-Debug/*.obj
-*.props
