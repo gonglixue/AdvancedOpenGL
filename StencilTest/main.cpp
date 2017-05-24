@@ -176,6 +176,7 @@ int main()
 
 		
 		// draw floor as normal
+
 		glStencilMask(0x00);  // 不写入stencil buffer
 		glBindVertexArray(planeVAO);
 		glBindTexture(GL_TEXTURE_2D, floorTexture);
@@ -203,6 +204,7 @@ int main()
 		// 2nd, draw slightly scaled versions of the objects, 
 		// because stencil buffer is now filled with several 1s. The parts of the buffer that are 1 are 
 		// noew not drawn, thus only drawing the objects' size differences, making it look like borders.
+
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);  // 第一个pass里最终绘制出的片元的stencil buffer都是1.
 		glStencilMask(0x00);
 		glDisable(GL_DEPTH_TEST);
@@ -224,6 +226,7 @@ int main()
 		glBindVertexArray(0);
 		glStencilMask(0xFF);
 		glEnable(GL_DEPTH_TEST);
+
 
 		glfwSwapBuffers(window);
 
