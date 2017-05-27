@@ -2,3 +2,4 @@
 *.exe
 Debug/*.obj
 *.props
+Debug/
