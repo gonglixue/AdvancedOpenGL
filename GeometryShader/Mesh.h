@@ -26,6 +26,7 @@ class Mesh
 {
 public:
 	Mesh();
+	~Mesh();
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	Mesh(vector<Vertex> &vertices_in, vector<GLuint> &indices_in);

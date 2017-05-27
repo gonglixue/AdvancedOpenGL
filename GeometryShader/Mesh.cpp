@@ -51,7 +51,9 @@ Mesh::Mesh(string FilePath)
 					int index;
 					temp >> index;
 					this->indices.push_back(index - 1);
+					cout << index << " ";
 				}
+				cout << endl;
 				break;
 			}
 			}
@@ -64,17 +66,20 @@ Mesh::Mesh(string FilePath)
 				input_file >> vertNormal[0] >> vertNormal[1] >> vertNormal[2];
 				this->vertices[vnCount].Normal = vertNormal;
 				vnCount++;
-				break;
 			}
 		}
 	}
 	
 	input_file.close();
 	cout << "vCount:" << vCount << "; vnCount:" << vnCount << endl;
+	cout << "indices:" << this->indices.size() << endl;
 
 	setupMesh();
 }
-
+Mesh::~Mesh()
+{
+	deleteBuffer();
+}
 void Mesh::setupMesh()
 {
 	glGenVertexArrays(1, &this->VAO);
