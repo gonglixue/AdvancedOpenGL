@@ -61,6 +61,9 @@ int main()
 	glm::vec3 objColor = glm::vec3(0.3, 0.9, 0.2);
 	
 
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	
 	// Vertex data
 	//GLfloat points[] = {
 	//	-0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // Top-left
@@ -93,8 +96,9 @@ int main()
 		Do_Movement();
 
 		// Clear buffers
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+		
 
 		// Draw points
 		//shader.Use();
